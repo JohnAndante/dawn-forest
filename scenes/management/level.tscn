@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://glc5txdr2m64"]
+[gd_scene load_steps=7 format=4 uid="uid://glc5txdr2m64"]
 
 [ext_resource type="TileSet" uid="uid://xmf23cokl62y" path="res://resources/floor.tres" id="1_cx1xh"]
 [ext_resource type="TileSet" uid="uid://dlgxcgu6dl151" path="res://resources/regular_decoration.tres" id="2_34jvx"]
 [ext_resource type="TileSet" uid="uid://df4ed501gkehw" path="res://resources/small_decoration.tres" id="3_365vi"]
 [ext_resource type="PackedScene" uid="uid://d3d2y7ms4f4fg" path="res://scenes/environment/background.tscn" id="4_d6aa2"]
 [ext_resource type="PackedScene" uid="uid://8wy2qx4g5krd" path="res://scenes/environment/mask.tscn" id="5_34jvx"]
+[ext_resource type="PackedScene" uid="uid://djg8dkycal7pq" path="res://scenes/player/player.tscn" id="6_365vi"]
 
 [node name="Level" type="Node"]
 
@@ -29,3 +30,6 @@ tile_set = ExtResource("3_365vi")
 [node name="Background" parent="." instance=ExtResource("4_d6aa2")]
 
 [node name="Mask" parent="." instance=ExtResource("5_34jvx")]
+
+[node name="Player" parent="." instance=ExtResource("6_365vi")]
+position = Vector2(96, 100)

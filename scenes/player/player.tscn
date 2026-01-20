@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://djg8dkycal7pq"]
+[gd_scene load_steps=15 format=3 uid="uid://djg8dkycal7pq"]
 
 [ext_resource type="SpriteFrames" uid="uid://boc47dcptxo0k" path="res://scenes/player/player_sprite_frames.tres" id="1_8afob"]
+[ext_resource type="Script" uid="uid://3e3lowqpxj30" path="res://scripts/player/player.gd" id="1_dovo2"]
 
 [sub_resource type="Animation" id="Animation_8afob"]
 resource_name = "idle"
@@ -339,6 +340,8 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_dovo2")
+speed = 75
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 
