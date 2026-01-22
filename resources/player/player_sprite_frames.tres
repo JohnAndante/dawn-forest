@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=53 format=3 uid="uid://boc47dcptxo0k"]
+[gd_resource type="SpriteFrames" load_steps=54 format=3 uid="uid://boc47dcptxo0k"]
 
 [ext_resource type="Texture2D" uid="uid://beu8in6yjj7d6" path="res://assets/player/char_blue.png" id="1_vq8b0"]
 
@@ -141,6 +141,10 @@ region = Rect2(392, 168, 56, 56)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2vsf5"]
 atlas = ExtResource("1_vq8b0")
 region = Rect2(0, 224, 56, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dv4ch"]
+atlas = ExtResource("1_vq8b0")
+region = Rect2(56, 224, 56, 56)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ms4ll"]
 atlas = ExtResource("1_vq8b0")
@@ -338,6 +342,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2vsf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dv4ch")
 }],
 "loop": false,
 "name": &"jump",

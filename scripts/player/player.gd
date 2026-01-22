@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var player_sprite: AnimatedSprite2D = $AnimatedTexture
+@onready var player_sprite: PlayerTexture = $Texture
 
 @export var speed: int
 @export var jump_speed: int
