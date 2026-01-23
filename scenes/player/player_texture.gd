@@ -1,6 +1,8 @@
 extends Sprite2D
 class_name PlayerTexture
 
+signal game_over
+
 @export var animation_path: AnimationPlayer
 @export var player: CharacterBody2D
 @export var attack_collision: CollisionShape2D
@@ -105,3 +107,5 @@ func _on_animation_finished(anim_name: StringName) -> void:
 				animation_path.play("defense")
 			if player.crouching:
 				animation_path.play("crouch")
+		"death": 
+			emit_signal("game_over")

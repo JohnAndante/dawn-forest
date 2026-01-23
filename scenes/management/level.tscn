@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=4 uid="uid://glc5txdr2m64"]
+[gd_scene load_steps=9 format=4 uid="uid://glc5txdr2m64"]
 
 [ext_resource type="TileSet" uid="uid://xmf23cokl62y" path="res://resources/environment/floor.tres" id="1_cx1xh"]
+[ext_resource type="Script" uid="uid://ob3oxdu2aio1" path="res://scripts/management/level.gd" id="1_d6aa2"]
 [ext_resource type="TileSet" uid="uid://dlgxcgu6dl151" path="res://resources/environment/regular_decoration.tres" id="2_34jvx"]
 [ext_resource type="TileSet" uid="uid://df4ed501gkehw" path="res://resources/environment/small_decoration.tres" id="3_365vi"]
 [ext_resource type="PackedScene" uid="uid://d3d2y7ms4f4fg" path="res://scenes/environment/background.tscn" id="4_d6aa2"]
@@ -13,6 +14,7 @@ glow_enabled = true
 glow_hdr_threshold = 1.5
 
 [node name="Level" type="Node"]
+script = ExtResource("1_d6aa2")
 
 [node name="LevelDesign" type="Node" parent="."]
 
