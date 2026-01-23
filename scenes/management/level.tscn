@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://glc5txdr2m64"]
+[gd_scene load_steps=8 format=4 uid="uid://glc5txdr2m64"]
 
 [ext_resource type="TileSet" uid="uid://xmf23cokl62y" path="res://resources/environment/floor.tres" id="1_cx1xh"]
 [ext_resource type="TileSet" uid="uid://dlgxcgu6dl151" path="res://resources/environment/regular_decoration.tres" id="2_34jvx"]
@@ -6,6 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://d3d2y7ms4f4fg" path="res://scenes/environment/background.tscn" id="4_d6aa2"]
 [ext_resource type="PackedScene" uid="uid://8wy2qx4g5krd" path="res://scenes/environment/mask.tscn" id="5_34jvx"]
 [ext_resource type="PackedScene" uid="uid://djg8dkycal7pq" path="res://scenes/player/player.tscn" id="6_365vi"]
+
+[sub_resource type="Environment" id="Environment_365vi"]
+background_mode = 3
+glow_enabled = true
+glow_hdr_threshold = 1.5
 
 [node name="Level" type="Node"]
 
@@ -38,3 +43,6 @@ tile_set = ExtResource("3_365vi")
 [node name="Player" parent="." instance=ExtResource("6_365vi")]
 position = Vector2(96, 100)
 player_gravity = 400
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_365vi")
