@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://djg8dkycal7pq"]
+[gd_scene load_steps=23 format=3 uid="uid://djg8dkycal7pq"]
 
 [ext_resource type="Script" uid="uid://3e3lowqpxj30" path="res://scripts/player/player.gd" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://ctyqnt3twcmir" path="res://scenes/player/player_texture.gd" id="3_gmlin"]
 [ext_resource type="Texture2D" uid="uid://beu8in6yjj7d6" path="res://assets/player/char_blue.png" id="4_lvxji"]
+[ext_resource type="Texture2D" uid="uid://ha0yekwbg7tg" path="res://assets/effect/light.png" id="4_p47bc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmlin"]
 size = Vector2(13, 29)
@@ -338,6 +339,69 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lvxji"]
 
+[sub_resource type="Animation" id="Animation_gx1jg"]
+resource_name = "light_animation"
+length = 10.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.3, 0.25, 0.3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.8, 0.6, 0.8]
+}
+
+[sub_resource type="Animation" id="Animation_ugbui"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fcs02"]
+_data = {
+&"RESET": SubResource("Animation_ugbui"),
+&"light_animation": SubResource("Animation_gx1jg")
+}
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite", "wall_ray")]
 script = ExtResource("1_dovo2")
 player_sprite = NodePath("Texture")
@@ -383,6 +447,17 @@ shape = SubResource("RectangleShape2D_lvxji")
 disabled = true
 
 [node name="WallRay" type="RayCast2D" parent="."]
-target_position = Vector2(11, 0)
+target_position = Vector2(8, 0)
+
+[node name="Light" type="PointLight2D" parent="."]
+energy = 0.8
+texture = ExtResource("4_p47bc")
+texture_scale = 0.3
+
+[node name="Animation" type="AnimationPlayer" parent="Light"]
+libraries = {
+&"": SubResource("AnimationLibrary_fcs02")
+}
+autoplay = "light_animation"
 
 [connection signal="animation_finished" from="Animation" to="Texture" method="_on_animation_finished"]

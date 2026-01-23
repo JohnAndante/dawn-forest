@@ -34,7 +34,6 @@ tile_set = ExtResource("3_365vi")
 [node name="Background" parent="." instance=ExtResource("4_d6aa2")]
 
 [node name="Mask" parent="." instance=ExtResource("5_34jvx")]
-visible = false
 
 [node name="Player" parent="." instance=ExtResource("6_365vi")]
 position = Vector2(96, 100)

@@ -33,10 +33,10 @@ func verify_position(direction: Vector2) -> void:
 
 func update_ray_direction() -> void:
 	if flip_h:
-		player.wall_ray.target_position = Vector2(-11.0, 0)
+		player.wall_ray.target_position = Vector2(-8.0, 0)
 		player.direction = 1
 	else:
-		player.wall_ray.target_position = Vector2(11.0, 0)
+		player.wall_ray.target_position = Vector2(8.0, 0)
 		player.direction = -1
 
 func horizontal_behaviour(direction: Vector2) -> void:
@@ -64,6 +64,16 @@ func action_behaviour() -> void:
 	if player.crouching and crouching_off:
 		animation_path.play("crouch")
 		crouching_off = false
+
+func update_collision_position() -> void:
+	if player.is_next_to_wall():
+		if flip_h and position != Vector2(-2, 0):
+			position = Vector2(-2, 0)
+		elif not flip_h and position != Vector2(1, 0):
+			position = Vector2(1, 0)
+	else:
+		if position != Vector2.ZERO:
+			position = Vector2.ZERO
 
 func _on_animation_finished(anim_name: StringName) -> void:
 	match anim_name:
