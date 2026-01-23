@@ -344,7 +344,10 @@ player_sprite = NodePath("Texture")
 wall_ray = NodePath("WallRay")
 speed = 75
 jump_speed = -175
-player_gravity = 250
+player_gravity = 350
+wall_jump_speed = -150
+wall_gravity = 115
+wall_impulse_speed = 500
 
 [node name="Texture" type="Sprite2D" parent="." node_paths=PackedStringArray("animation_path", "player")]
 texture = ExtResource("4_lvxji")
@@ -355,7 +358,6 @@ animation_path = NodePath("../Animation")
 player = NodePath("..")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-0.5, 11.5)
 shape = SubResource("RectangleShape2D_gmlin")
 
