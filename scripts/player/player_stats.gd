@@ -1,6 +1,8 @@
 extends Node
 class_name PlayerStats
 
+@export var player: CharacterBody2D
+
 var shielding: bool = false
 
 var base_health: int = 15
@@ -50,7 +52,42 @@ func update_exp(value: int) -> void:
 		current_exp = leftover
 		on_level_up()
 		level += 1
+	elif current_exp >= level_dict[str(level)] and level == 9:
+		current_exp = level_dict[str(level)]
 
 func on_level_up() -> void:
 	current_mana = base_mana + bonus_mana
 	current_health = base_health + bonus_health
+
+func update_health(type: String, value: int) -> void:
+	match type:
+		"Increase":
+			current_health += value
+			if current_health >= max_health:
+				current_health = max_health
+		"Decrease":
+			verify_shield(value)
+			if current_health <= 0:
+				player.dead = true
+			else:
+				player.on_hit = true
+				player.attacking = false
+
+func update_mana(type: String, value: int) -> void:
+	match type:
+		"Increase":
+			current_mana += value
+			if current_mana >= max_mana:
+				current_mana = max_mana
+		"Decrease":
+			current_mana -= value
+
+func verify_shield(value: int) -> void:
+	if shielding:
+		if (base_defense + bonus_defense) >= value:
+			return
+		
+		var damage: int = abs((base_defense + bonus_defense) - value)
+		current_health -= damage
+	else:
+		current_health -= value
