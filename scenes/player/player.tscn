@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://djg8dkycal7pq"]
+[gd_scene load_steps=24 format=3 uid="uid://djg8dkycal7pq"]
 
 [ext_resource type="Script" uid="uid://3e3lowqpxj30" path="res://scripts/player/player.gd" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://ctyqnt3twcmir" path="res://scenes/player/player_texture.gd" id="3_gmlin"]
 [ext_resource type="Texture2D" uid="uid://beu8in6yjj7d6" path="res://assets/player/char_blue.png" id="4_lvxji"]
 [ext_resource type="Texture2D" uid="uid://ha0yekwbg7tg" path="res://assets/effect/light.png" id="4_p47bc"]
+[ext_resource type="Script" uid="uid://d3tcqnj7y4wpg" path="res://scripts/player/player_stats.gd" id="5_p47bc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmlin"]
 size = Vector2(13, 29)
@@ -460,5 +461,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_fcs02")
 }
 autoplay = "light_animation"
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("5_p47bc")
 
 [connection signal="animation_finished" from="Animation" to="Texture" method="_on_animation_finished"]
