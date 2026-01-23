@@ -24,14 +24,21 @@ var crouching: bool = false
 
 var can_track_input: bool = false
 var not_on_wall: bool = true
+var was_on_floor: bool = false
 
 func _physics_process(delta: float) -> void:
 	horizontal_movement_env()
 	vertical_movement_env()
+	handle_wall_logic()
 	actions_env()
 
 	gravity(delta)
 	move_and_slide()
+
+	if is_on_floor() and not was_on_floor:
+		landing = true
+
+	was_on_floor = is_on_floor()
 	player_sprite.animate(velocity)
 
 func horizontal_movement_env() -> void:
@@ -49,14 +56,14 @@ func vertical_movement_env() -> void:
 	var can_jump = jump_count < 2 and can_track_input and not attacking
 	if Input.is_action_just_pressed("jump") and can_jump:
 		jump_count += 1
-		if next_to_wall() and not is_on_floor():
+		if is_next_to_wall():
 			velocity.y = wall_jump_speed
 			velocity.x += wall_impulse_speed * direction
 		else:
 			velocity.y = jump_speed
 
 func gravity(delta: float) -> void:
-	if next_to_wall():
+	if is_next_to_wall():
 		velocity.y += wall_gravity * delta
 		if velocity.y >= wall_gravity:
 			velocity.y = wall_gravity
@@ -65,15 +72,16 @@ func gravity(delta: float) -> void:
 		if velocity.y >= player_gravity:
 			velocity.y = player_gravity
 
-func next_to_wall() -> bool:
-	if wall_ray.is_colliding() and not is_on_floor():
+func handle_wall_logic() -> void:
+	if is_next_to_wall():
 		if not_on_wall:
 			velocity.y = 0
 			not_on_wall = false
-		return true
 	else:
 		not_on_wall = true
-		return false
+
+func is_next_to_wall() -> bool:
+	return wall_ray.is_colliding() and not is_on_floor()
 
 func actions_env() -> void:
 	attack()
