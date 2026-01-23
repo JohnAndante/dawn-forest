@@ -3,6 +3,7 @@ class_name PlayerTexture
 
 @export var animation_path: AnimationPlayer
 @export var player: CharacterBody2D
+@export var attack_collision: CollisionShape2D
 
 var suffix: String = "_right"
 var normal_attack: bool = false
@@ -12,8 +13,10 @@ var crouching_off: bool = false
 func animate(direction: Vector2) -> void:
 	verify_position(direction)
 	update_ray_direction()
-
-	if player.attacking or player.defending or player.crouching or player.is_next_to_wall():
+	
+	if player.on_hit or player.dead:
+		hit_behaviour()
+	elif player.attacking or player.defending or player.crouching or player.is_next_to_wall():
 		action_behaviour()
 	elif direction.y != 0:
 		vertical_behaviour(direction)
@@ -53,6 +56,15 @@ func vertical_behaviour(direction: Vector2) -> void:
 	elif direction.y < 0:
 		animation_path.play("jump")
 
+func hit_behaviour() -> void:
+	player.set_physics_process(false)
+	attack_collision.set_deferred("disabled", true)
+	
+	if player.dead:
+		animation_path.play("death")
+	elif player.on_hit:
+		animation_path.play("hit")
+
 func action_behaviour() -> void:
 	if player.is_next_to_wall():
 		animation_path.play("wall_slide")
@@ -86,3 +98,10 @@ func _on_animation_finished(anim_name: StringName) -> void:
 		"attack_right":
 			normal_attack = false
 			player.attacking = false
+		"hit":
+			player.on_hit = false
+			player.set_physics_process(true)
+			if player.defending:
+				animation_path.play("shield")
+			if player.crouching:
+				animation_path.play("crouch")

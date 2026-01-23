@@ -433,13 +433,14 @@ wall_jump_speed = -150
 wall_gravity = 115
 wall_impulse_speed = 500
 
-[node name="Texture" type="Sprite2D" parent="." node_paths=PackedStringArray("animation_path", "player")]
+[node name="Texture" type="Sprite2D" parent="." node_paths=PackedStringArray("animation_path", "player", "attack_collision")]
 texture = ExtResource("4_lvxji")
 hframes = 8
 vframes = 11
 script = ExtResource("3_gmlin")
 animation_path = NodePath("../Animation")
 player = NodePath("..")
+attack_collision = NodePath("../AttackArea/Collision")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 11.5)

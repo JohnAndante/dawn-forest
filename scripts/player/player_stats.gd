@@ -91,3 +91,7 @@ func verify_shield(value: int) -> void:
 		current_health -= damage
 	else:
 		current_health -= value
+
+func _process(_delta) -> void:
+	if Input.is_action_just_pressed("ui_end"):
+		update_health("Decrease", 5)
