@@ -102,6 +102,6 @@ func _on_animation_finished(anim_name: StringName) -> void:
 			player.on_hit = false
 			player.set_physics_process(true)
 			if player.defending:
-				animation_path.play("shield")
+				animation_path.play("defense")
 			if player.crouching:
 				animation_path.play("crouch")
