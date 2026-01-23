@@ -338,9 +338,10 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lvxji"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite", "wall_ray")]
 script = ExtResource("1_dovo2")
 player_sprite = NodePath("Texture")
+wall_ray = NodePath("WallRay")
 speed = 75
 jump_speed = -175
 player_gravity = 250
