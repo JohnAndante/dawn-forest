@@ -2,6 +2,8 @@ extends Node
 class_name PlayerStats
 
 @export var player: CharacterBody2D
+@export var collision_area: Area2D
+@export var invencibillity_timer: Timer
 
 var shielding: bool = false
 
@@ -95,3 +97,12 @@ func verify_shield(value: int) -> void:
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("ui_end"):
 		update_health("Decrease", 5)
+
+func on_collision_area_entered(area: Area2D) -> void:
+	if area.name == "EnemyAttackArea":
+		update_health("Decrease", area.damage)
+		collision_area.set_deferred("monitoring", false)
+		invencibillity_timer.start(area.invencibillity_timer)
+
+func on_invencibillity_timer_timeout() -> void:
+	collision_area.set_deferred("monitoring", true)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://djg8dkycal7pq"]
+[gd_scene format=3 uid="uid://djg8dkycal7pq"]
 
 [ext_resource type="Script" uid="uid://3e3lowqpxj30" path="res://scripts/player/player.gd" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://ctyqnt3twcmir" path="res://scenes/player/player_texture.gd" id="3_gmlin"]
@@ -234,6 +234,23 @@ tracks/0/keys = {
 "values": [34, 35, 36]
 }
 
+[sub_resource type="Animation" id="Animation_fcs02"]
+resource_name = "hit"
+length = 0.40001002
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [40, 41, 42, 43]
+}
+
 [sub_resource type="Animation" id="Animation_8afob"]
 resource_name = "idle"
 length = 0.80001
@@ -322,23 +339,6 @@ tracks/0/keys = {
 "values": [85, 86]
 }
 
-[sub_resource type="Animation" id="Animation_fcs02"]
-resource_name = "hit"
-length = 0.40001002
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Texture:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [40, 41, 42, 43]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gmlin"]
 _data = {
 &"RESET": SubResource("Animation_dovo2"),
@@ -357,6 +357,33 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lvxji"]
+
+[sub_resource type="Animation" id="Animation_ugbui"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.8]
+}
 
 [sub_resource type="Animation" id="Animation_gx1jg"]
 resource_name = "light_animation"
@@ -388,40 +415,13 @@ tracks/1/keys = {
 "values": [0.8, 0.6, 0.8]
 }
 
-[sub_resource type="Animation" id="Animation_ugbui"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.8]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fcs02"]
 _data = {
 &"RESET": SubResource("Animation_ugbui"),
 &"light_animation": SubResource("Animation_gx1jg")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite", "wall_ray", "stats")]
+[node name="Player" type="CharacterBody2D" unique_id=885180982 node_paths=PackedStringArray("player_sprite", "wall_ray", "stats")]
 script = ExtResource("1_dovo2")
 player_sprite = NodePath("Texture")
 wall_ray = NodePath("WallRay")
@@ -433,7 +433,7 @@ wall_jump_speed = -150
 wall_gravity = 115
 wall_impulse_speed = 500
 
-[node name="Texture" type="Sprite2D" parent="." node_paths=PackedStringArray("animation_path", "player", "attack_collision")]
+[node name="Texture" type="Sprite2D" parent="." unique_id=1441142820 node_paths=PackedStringArray("animation_path", "player", "attack_collision")]
 texture = ExtResource("4_lvxji")
 hframes = 8
 vframes = 11
@@ -442,16 +442,14 @@ animation_path = NodePath("../Animation")
 player = NodePath("..")
 attack_collision = NodePath("../AttackArea/Collision")
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1849476836]
 position = Vector2(-0.5, 11.5)
 shape = SubResource("RectangleShape2D_gmlin")
 
-[node name="Animation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_gmlin")
-}
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=1922644160]
+libraries/ = SubResource("AnimationLibrary_gmlin")
 
-[node name="PlayerCamera" type="Camera2D" parent="."]
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=604568193]
 limit_top = 0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -460,30 +458,39 @@ drag_top_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
 
-[node name="AttackArea" type="Area2D" parent="."]
+[node name="AttackArea" type="Area2D" parent="." unique_id=980880474]
 
-[node name="Collision" type="CollisionShape2D" parent="AttackArea"]
+[node name="Collision" type="CollisionShape2D" parent="AttackArea" unique_id=380597364]
 position = Vector2(4, 5)
 shape = SubResource("RectangleShape2D_lvxji")
 disabled = true
 
-[node name="WallRay" type="RayCast2D" parent="."]
+[node name="WallRay" type="RayCast2D" parent="." unique_id=1528243006]
 target_position = Vector2(8, 0)
 
-[node name="Light" type="PointLight2D" parent="."]
+[node name="Light" type="PointLight2D" parent="." unique_id=39045968]
 color = Color(0.7844438, 0.7844438, 1.0627335, 1)
 energy = 0.8
 texture = ExtResource("4_p47bc")
 texture_scale = 0.3
 
-[node name="Animation" type="AnimationPlayer" parent="Light"]
-libraries = {
-&"": SubResource("AnimationLibrary_fcs02")
-}
-autoplay = "light_animation"
+[node name="Animation" type="AnimationPlayer" parent="Light" unique_id=1244913608]
+libraries/ = SubResource("AnimationLibrary_fcs02")
+autoplay = &"light_animation"
 
-[node name="Stats" type="Node" parent="." node_paths=PackedStringArray("player")]
+[node name="Stats" type="Node" parent="." unique_id=535023356 node_paths=PackedStringArray("player", "collision_area")]
 script = ExtResource("5_p47bc")
 player = NodePath("..")
+collision_area = NodePath("../CollisionArea")
+
+[node name="InvencibillityTimer" type="Timer" parent="Stats" unique_id=1539750184]
+
+[node name="CollisionArea" type="Area2D" parent="." unique_id=1295955230]
+
+[node name="Collision" type="CollisionShape2D" parent="CollisionArea" unique_id=881027558]
+position = Vector2(-0.5, 11.5)
+shape = SubResource("RectangleShape2D_gmlin")
 
 [connection signal="animation_finished" from="Animation" to="Texture" method="_on_animation_finished"]
+[connection signal="timeout" from="Stats/InvencibillityTimer" to="Stats" method="on_invencibillity_timer_timeout"]
+[connection signal="area_entered" from="CollisionArea" to="Stats" method="on_collision_area_entered"]
